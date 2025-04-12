@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import Button from '@/components/common/Button';
+import { signIn, signUp } from '@/services/auth.service';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface AuthFormProps {
   mode: 'login' | 'signup';
@@ -10,6 +12,7 @@ interface AuthFormProps {
 
 const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,23 +42,20 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
     
     setLoading(true);
     
-    // Simulate auth for demonstration
     try {
-      // In a real app, this would connect to Firebase Auth
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Simulate login success
-      localStorage.setItem('user', JSON.stringify({ 
-        email, 
-        name: mode === 'signup' ? name : 'Demo User',
-        id: 'user123'
-      }));
-      
-      toast.success(mode === 'login' ? 'Logged in successfully!' : 'Account created successfully!');
+      if (mode === 'login') {
+        const user = await signIn(email, password);
+        setCurrentUser(user);
+        toast.success('Logged in successfully!');
+      } else {
+        const user = await signUp(email, password, name);
+        setCurrentUser(user);
+        toast.success('Account created successfully!');
+      }
       navigate('/');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Auth error:', error);
-      toast.error('Authentication failed. Please try again.');
+      toast.error(error.message || 'Authentication failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -131,7 +131,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
           <button 
             type="button" 
             className="text-sm text-restaurant-primary font-medium"
-            onClick={() => toast.info('Password reset functionality would go here')}
+            onClick={() => navigate('/forgot-password')}
           >
             Forgot password?
           </button>
