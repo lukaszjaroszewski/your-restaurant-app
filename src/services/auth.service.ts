@@ -15,6 +15,17 @@ export interface AuthUser {
   id: string;
 }
 
+// Safe localStorage functions
+const safeRemoveItem = (key: string) => {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(key);
+    }
+  } catch (error) {
+    console.error('localStorage error:', error);
+  }
+};
+
 export const signUp = async (email: string, password: string, name: string): Promise<AuthUser> => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -51,7 +62,7 @@ export const signIn = async (email: string, password: string): Promise<AuthUser>
 export const signOut = async (): Promise<void> => {
   try {
     await firebaseSignOut(auth);
-    localStorage.removeItem('user');
+    safeRemoveItem('user');
   } catch (error: any) {
     throw new Error(error.message || 'Failed to sign out');
   }

@@ -20,9 +20,54 @@ export const useAuth = () => {
   return context;
 };
 
+// Safe localStorage functions
+const safeSetItem = (key: string, value: string) => {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(key, value);
+    }
+  } catch (error) {
+    console.error('localStorage error:', error);
+  }
+};
+
+const safeGetItem = (key: string) => {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(key);
+    }
+  } catch (error) {
+    console.error('localStorage error:', error);
+  }
+  return null;
+};
+
+const safeRemoveItem = (key: string) => {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(key);
+    }
+  } catch (error) {
+    console.error('localStorage error:', error);
+  }
+};
+
 export const AuthProvider: React.FC<{children: ReactNode}> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Initialize user from localStorage if available
+  useEffect(() => {
+    const storedUser = safeGetItem('user');
+    if (storedUser) {
+      try {
+        setCurrentUser(JSON.parse(storedUser));
+      } catch (e) {
+        console.error('Failed to parse stored user', e);
+        safeRemoveItem('user');
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -33,10 +78,10 @@ export const AuthProvider: React.FC<{children: ReactNode}> = ({ children }) => {
           id: user.uid
         };
         setCurrentUser(authUser);
-        localStorage.setItem('user', JSON.stringify(authUser));
+        safeSetItem('user', JSON.stringify(authUser));
       } else {
         setCurrentUser(null);
-        localStorage.removeItem('user');
+        safeRemoveItem('user');
       }
       setLoading(false);
     });
