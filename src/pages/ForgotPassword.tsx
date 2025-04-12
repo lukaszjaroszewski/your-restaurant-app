@@ -18,6 +18,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setSuccess(false);
 
     if (!email) {
       setError('Please enter your email address');
@@ -28,6 +29,7 @@ const ForgotPassword = () => {
 
     try {
       await resetPassword(email);
+      // Only set success after confirming the operation worked
       setSuccess(true);
       toast.success('Password reset email sent!');
     } catch (error: any) {
@@ -35,6 +37,7 @@ const ForgotPassword = () => {
       const errorCode = extractErrorCode(error.message);
       const userFriendlyMessage = getAuthErrorMessage(errorCode);
       setError(userFriendlyMessage);
+      setSuccess(false); // Ensure success is false when there's an error
     } finally {
       setLoading(false);
     }
