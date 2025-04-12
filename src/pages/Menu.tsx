@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import Header from '@/components/common/Header';
 import Container from '@/components/common/Container';
 import DishCard from '@/components/common/DishCard';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 
 // Sample menu data
 const menuCategories = [

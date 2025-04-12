@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import Header from '@/components/common/Header';
 import Container from '@/components/common/Container';
 import Button from '@/components/common/Button';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 
 const timeSlots = [
   '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', 

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '@/components/common/Header';
 import Container from '@/components/common/Container';
 import Button from '@/components/common/Button';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ClipboardList, User, Settings, LogOut } from 'lucide-react';
 

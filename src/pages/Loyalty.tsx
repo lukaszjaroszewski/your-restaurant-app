@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/common/Header';
 import Container from '@/components/common/Container';
 import { Award, Gift } from 'lucide-react';
 import Button from '@/components/common/Button';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 
 const Loyalty = () => {
   const [points, setPoints] = useState(0);

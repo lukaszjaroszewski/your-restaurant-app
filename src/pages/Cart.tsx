@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/common/Header';
 import Container from '@/components/common/Container';
 import Button from '@/components/common/Button';
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 
 interface CartItem {
   id: string;
