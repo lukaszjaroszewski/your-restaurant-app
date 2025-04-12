@@ -4,12 +4,12 @@ import { getAuth } from 'firebase/auth';
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCgM34sao-8lAjmMSePzCcNGVeNCq9b48A",
+  authDomain: "restaurantapp-979a5.firebaseapp.com",
+  projectId: "restaurantapp-979a5",
+  storageBucket: "restaurantapp-979a5.firebasestorage.app",
+  messagingSenderId: "310480728314",
+  appId: "1:310480728314:web:f54048cc11f68ba534d943",
 };
 
 // Initialize Firebase
