@@ -5,6 +5,9 @@ import { toast } from 'sonner';
 import Button from '@/components/common/Button';
 import { signIn, signUp } from '@/services/auth.service';
 import { useAuth } from '@/contexts/AuthContext';
+import { extractErrorCode, getAuthErrorMessage } from '@/utils/errorMessages';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react';
 
 interface AuthFormProps {
   mode: 'login' | 'signup';
@@ -18,24 +21,26 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     
     // Form validation
     if (!email || !password) {
-      toast.error('Please fill in all required fields');
+      setError('Please fill in all required fields');
       return;
     }
     
     if (mode === 'signup') {
       if (password !== confirmPassword) {
-        toast.error('Passwords do not match');
+        setError('Passwords do not match');
         return;
       }
       
       if (!name) {
-        toast.error('Please enter your name');
+        setError('Please enter your name');
         return;
       }
     }
@@ -55,7 +60,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
       navigate('/');
     } catch (error: any) {
       console.error('Auth error:', error);
-      toast.error(error.message || 'Authentication failed. Please try again.');
+      const errorCode = extractErrorCode(error.message);
+      const userFriendlyMessage = getAuthErrorMessage(errorCode);
+      setError(userFriendlyMessage);
     } finally {
       setLoading(false);
     }
@@ -63,6 +70,13 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md mx-auto">
+      {error && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      
       {mode === 'signup' && (
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
