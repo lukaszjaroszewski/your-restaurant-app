@@ -52,7 +52,7 @@ const Loyalty = () => {
 
   return (
     <>
-      <Header title="Loyalty Card" showBack showNotification />
+      <Header title="Loyalty Card" showNotification />
       <Container>
         <div className="space-y-6">
           {/* Loyalty Card */}
