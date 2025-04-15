@@ -16,7 +16,7 @@ const Container: React.FC<ContainerProps> = ({
   return (
     <div 
       className={cn(
-        "px-4 py-4 pb-20", 
+        "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 pb-20", 
         fullHeight ? "min-h-[calc(100vh-56px)]" : "",
         className
       )}

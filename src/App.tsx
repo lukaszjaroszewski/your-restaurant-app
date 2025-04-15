@@ -103,7 +103,7 @@ const App = () => {
         <Sonner />
         <AuthProvider>
           <BrowserRouter>
-            <div className="max-w-lg mx-auto min-h-screen bg-restaurant-cream">
+            <div className="min-h-screen bg-restaurant-cream">
               <AuthRoutes />
             </div>
           </BrowserRouter>
