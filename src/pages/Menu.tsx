@@ -94,7 +94,7 @@ const Menu = () => {
 
   return (
     <>
-      <Header title="Menu" showBack showNotification />
+      <Header title="Menu" showNotification />
       <Container>
         {/* Category filters */}
         <div className="pb-4 mb-4 overflow-x-auto">
