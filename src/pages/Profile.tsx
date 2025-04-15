@@ -43,7 +43,7 @@ const Profile = () => {
         </div>
         
         <Tabs defaultValue="orders" className="w-full">
-          <TabsList className="w-full grid grid-cols-3 mb-8 h-36">
+          <TabsList className="w-full grid grid-cols-3 mb-8 h-20">
             <TabsTrigger value="orders" className="flex flex-col items-center">
               <ClipboardList className="h-5 w-5 mb-1" />
               Orders
