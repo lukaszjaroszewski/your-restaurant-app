@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '@/components/common/Header';
 import Container from '@/components/common/Container';
 import Button from '@/components/common/Button';
-import { MapPin, Clock, Phone, Menu as MenuIcon } from 'lucide-react';
+import { MapPin, Clock, Phone, Utensils as MenuIcon } from 'lucide-react';
 
 // Simulated restaurant data
 const restaurantInfo = {
