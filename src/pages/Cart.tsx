@@ -76,7 +76,7 @@ const Cart = () => {
   if (cartItems.length === 0) {
     return (
       <>
-        <Header title="Your Order" showBack />
+        <Header title="Your Order" />
         <Container className="flex flex-col items-center justify-center h-[70vh]">
           <ShoppingBag size={64} className="text-gray-300 mb-4" />
           <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
@@ -89,7 +89,7 @@ const Cart = () => {
 
   return (
     <>
-      <Header title="Your Order" showBack />
+      <Header title="Your Order" />
       <Container>
         <div className="space-y-6">
           {/* Order Items */}
