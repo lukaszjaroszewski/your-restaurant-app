@@ -91,7 +91,7 @@ const Book = () => {
 
   return (
     <>
-      <Header title="Book a Table" showBack />
+      <Header title="Book a Table" />
       <Container>
         <div className="space-y-6">
           {/* Progress Steps */}
