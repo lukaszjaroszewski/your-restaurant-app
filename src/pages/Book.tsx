@@ -126,7 +126,7 @@ const Book = () => {
                   mode="single"
                   selected={date}
                   onSelect={handleDateSelect}
-                  className="mx-auto"
+                  className="w-full mx-auto"
                   disabled={(date) => {
                     const today = new Date();
                     today.setHours(0, 0, 0, 0);
