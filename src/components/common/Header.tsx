@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, Bell } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
@@ -20,14 +20,6 @@ const Header: React.FC<HeaderProps> = ({
     <div className="sticky top-0 z-10 bg-white shadow-sm">
       <div className="flex items-center justify-between px-4 py-4">
         <div className="flex items-center">
-          {showBack && (
-            <button 
-              onClick={() => navigate(-1)}
-              className="mr-3 p-1"
-            >
-              <ArrowLeft size={24} />
-            </button>
-          )}
           <h1 className="text-xl font-semibold">{title}</h1>
         </div>
         
@@ -42,3 +34,4 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 export default Header;
+
